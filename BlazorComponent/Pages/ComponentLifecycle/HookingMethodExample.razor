@@ -1,0 +1,13 @@
+﻿@page "/hooking-method"
+
+<h3>@Welcome</h3>
+
+@code {
+    private string Welcome = "";
+
+    // interfere on init process of this component
+    protected override void OnInitialized()
+    {
+        Welcome = "Welcome to Blazor School!";
+    }
+}

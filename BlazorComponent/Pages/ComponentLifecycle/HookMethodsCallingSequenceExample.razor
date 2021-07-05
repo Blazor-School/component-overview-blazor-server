@@ -1,0 +1,71 @@
+﻿@using System.Runtime.CompilerServices
+@page "/call-sequence"
+
+<div class="log">@((MarkupString)Log)</div>
+@if (Click < 2)
+{
+    <button class="btn btn-primary" @onclick="() => { Click++; StateHasChanged(); }">Trigger client side render</button>
+}
+
+<style>
+    .server-side
+    {
+        color: #7b3cc3;
+    }
+
+    .client-side
+    {
+        color: #38b0d9;
+    }
+
+    .method-name
+    {
+        color: #c22213;
+    }
+
+    .log
+    {
+        font-size: 20px;
+    }
+</style>
+
+@code {
+    private string Log = "";
+    private int Click = 0;
+
+    protected override void OnParametersSet()
+    {
+        Logging("called");
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await InvokeAsync(() => Logging("called"));
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await InvokeAsync(() => Logging("called"));
+    }
+
+    protected override void OnInitialized()
+    {
+        Logging("called");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await InvokeAsync(() => Logging($"called with firstRender={firstRender}"));
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Logging($"called with firstRender={firstRender}");
+    }
+
+    private void Logging(string logText, [CallerMemberName] string callFrom = "")
+    {
+        bool isClientSideRender = callFrom.StartsWith("OnAfterRender");
+        Log += $"<div class=\"{(isClientSideRender ? "client-side" : "server-side")}\"><span class=\"method-name\">{callFrom}</span> {logText} from {(isClientSideRender ? "client" : "server")} side</div>";
+    }
+}
