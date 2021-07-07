@@ -1,0 +1,27 @@
+﻿@using BlazorComponent.Data.ComponentLifecycle
+@page "/detect-changes"
+
+<div>
+    <CarDetail Car="Car"></CarDetail>
+</div>
+<div>
+    <button @onclick="ChangeColor">Change color</button>
+</div>
+
+@code {
+    private Car Car = new();
+    private List<string> Colors = new()
+    {
+        "Red",
+        "Green",
+        "Blue",
+        "Violet"
+    };
+
+    private void ChangeColor()
+    {
+        var random = new Random();
+        int randomIndex = random.Next(0, Colors.Count - 1);
+        Car.Color = Colors[randomIndex];
+    }
+}
