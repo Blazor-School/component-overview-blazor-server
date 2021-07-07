@@ -1,8 +1,12 @@
 ﻿@using BlazorComponent.Data.ComponentLifecycle
 @page "/detect-changes"
+@implements IDisposable
 
-<div>
+<h3>Car color in parent component: @Car.Color</h3>
+<div style="border: 5px solid #7b3cc3; width: max-content; padding: 8px;">
+    <span>---CarDetail.razor---</span>
     <CarDetail Car="Car"></CarDetail>
+    <span>---CarDetail.razor---</span>
 </div>
 <div>
     <button @onclick="ChangeColor">Change color</button>
@@ -23,5 +27,20 @@
         var random = new Random();
         int randomIndex = random.Next(0, Colors.Count - 1);
         Car.Color = Colors[randomIndex];
+    }
+
+    private void OnCarColorChanged(object sender, string color)
+    {
+        StateHasChanged();
+    }
+
+    protected override void OnInitialized()
+    {
+        Car.OnColorChanged += OnCarColorChanged;
+    }
+
+    public void Dispose()
+    {
+        Car.OnColorChanged -= OnCarColorChanged;
     }
 }

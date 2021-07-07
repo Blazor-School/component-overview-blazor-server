@@ -1,6 +1,7 @@
 ﻿@using BlazorComponent.Data.ComponentLifecycle
 
 <h3>Car color: @Car.Color</h3>
+<input @bind-value="@Car.Color" />
 <div>@((MarkupString)Log)</div>
 
 @code {
