@@ -1,0 +1,43 @@
+﻿@using BlazorComponent.Data.ComponentLifecycle
+@page "/init-and-dispose"
+@implements IDisposable
+
+<h3>@Car.Color</h3>
+<button @onclick="ChangeColor">Change color</button>
+<div>@((MarkupString)Log)</div>
+
+@code {
+    private Car Car;
+    private string Log;
+    private List<string> Colors;
+
+    protected override void OnInitialized()
+    {
+        Car = new() { Color = "Red" };
+        Car.OnColorChanged += OnColorChangedHandler;
+        Colors = new()
+        {
+            "Red",
+            "Green",
+            "Blue",
+            "Violet"
+        };
+    }
+
+    private void ChangeColor()
+    {
+        var random = new Random();
+        int randomIndex = random.Next(0, Colors.Count - 1);
+        Car.Color = Colors[randomIndex];
+    }
+
+    private void OnColorChangedHandler(object sender, string color)
+    {
+        Log += "Car color changed <br>";
+    }
+
+    public void Dispose()
+    {
+        Car.OnColorChanged -= OnColorChangedHandler;
+    }
+}
