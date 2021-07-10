@@ -48,3 +48,14 @@ a, .btn-link {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+.global
+{
+    color: #7b3cc3;
+}
+
+.global:after
+{
+    content: ' I am a global style from site.css';
+    color: red;
+}

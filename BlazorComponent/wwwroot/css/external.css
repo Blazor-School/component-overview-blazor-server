@@ -1,0 +1,10 @@
+﻿.external-style
+{
+    color: maroon;
+}
+
+.external-style:after
+{
+    content: ' I am an external style in external.css file';
+    color: red;
+}
