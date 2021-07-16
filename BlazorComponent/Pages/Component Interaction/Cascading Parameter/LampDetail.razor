@@ -1,0 +1,19 @@
+﻿@using BlazorComponent.Data.ComponentInteraction
+
+<div style="border: 5px solid blue">
+    <h3>LampDetail</h3>
+    <div>Best lamp name: @BestLamp.Name</div>
+    <div>Best lamp price: @BestLamp.Price</div>
+    <button @onclick="ChangeBestLamp">Change best lamp information</button>
+</div>
+
+@code {
+[CascadingParameter]
+public Lamp BestLamp { get; set; }
+
+    private void ChangeBestLamp()
+    {
+        BestLamp.Name = "Changed from detail";
+        BestLamp.Price = 0;
+    }
+}

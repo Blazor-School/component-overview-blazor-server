@@ -4,4 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Component Interaction\EventInvoker\" />
+    <Folder Include="Pages\Component Interaction\Passing delegate\" />
+    <Folder Include="Pages\Component Interaction\Parameter\" />
+  </ItemGroup>
+
 </Project>

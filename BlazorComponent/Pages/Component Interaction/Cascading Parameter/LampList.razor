@@ -1,0 +1,34 @@
+﻿@using BlazorComponent.Data.ComponentInteraction
+
+<div style="border: 5px solid green">
+    <h3>LampList</h3>
+    @foreach (Lamp lamp in Lamps)
+    {
+        <div>
+            <span>Name: @lamp.Name</span>
+            <span>Price @lamp.Price</span>
+        </div>
+    }
+    <LampDetail></LampDetail>
+</div>
+
+@code {
+    public List<Lamp> Lamps { get; set; } = new()
+    {
+        new()
+        {
+            Name = "Lamp1",
+            Price = 10
+        },
+        new()
+        {
+            Name = "Lamp2",
+            Price = 20
+        },
+        new()
+        {
+            Name = "Lamp3",
+            Price = 30
+        }
+    };
+}
