@@ -5,11 +5,15 @@
     <div>Best lamp name: @BestLamp.Name</div>
     <div>Best lamp price: @BestLamp.Price</div>
     <button @onclick="ChangeBestLamp">Change best lamp information</button>
+    <div>Best lamp name: @WorstLamp.Name</div>
+    <div>Best lamp price: @WorstLamp.Price</div>
 </div>
 
 @code {
-[CascadingParameter]
-public Lamp BestLamp { get; set; }
+    [CascadingParameter(Name = "GoodLamp")]
+    public Lamp BestLamp { get; set; }
+    [CascadingParameter(Name = "BadLamp")]
+    public Lamp WorstLamp { get; set; }
 
     private void ChangeBestLamp()
     {

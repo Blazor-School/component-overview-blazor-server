@@ -1,0 +1,19 @@
+﻿@using BlazorComponent.Data.ComponentInteraction
+
+<div style="border: 5px solid blue">
+    <h3>HardwareDetail</h3>
+    <div>Name: @Hardware.Name</div>
+    <div>Produce Date: @Hardware.ProduceDate</div>
+    <button @onclick="() => ChangeHardwareDetail()">Change detail in child</button>
+</div>
+
+@code {
+[Parameter]
+public Hardware Hardware { get; set; }
+
+    private void ChangeHardwareDetail()
+    {
+        Hardware.Name = "Changed in child component";
+        Hardware.ProduceDate = DateTime.MinValue;
+    }
+}

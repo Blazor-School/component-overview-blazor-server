@@ -1,0 +1,27 @@
+﻿@using Data.ComponentInteraction
+@page "/passing-delegate"
+
+<h3>PhoneDetail</h3>
+<div>
+    <div>Phone Name: @Phone.Name</div>
+    <div>Phone Battery: @Phone.BatteryPercentage</div>
+</div>
+Passing parameters
+<PhoneEdit Phone="Phone" OnUpdatePhoneValue="Render" OnUpdatePhoneValueAsync="RenderAsync"></PhoneEdit>
+
+Without passing paramter
+<PhoneEdit></PhoneEdit>
+
+@code {
+    public Phone Phone { get; set; } = new();
+
+    public void Render()
+    {
+        StateHasChanged();
+    }
+
+    public async Task RenderAsync()
+    {
+        await InvokeAsync(() => StateHasChanged());
+    }
+}

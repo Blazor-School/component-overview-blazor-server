@@ -1,0 +1,42 @@
+﻿@using BlazorComponent.Data.ComponentInteraction
+@page "/parameter"
+
+<div style="border: 5px solid green">
+    <h3>HardwareList</h3>
+    <button @onclick="() => StateHasChanged()">Re-render parent component</button>
+    @foreach (var hardware in Hardwares)
+    {
+        <div>Hardware in parent</div>
+        <div>Name: @hardware.Name</div>
+        <div>Produce Date: @hardware.ProduceDate</div>
+        <button @onclick="() => ChangeHardwareDetail(hardware)">Change detail in parent</button>
+        <HardwareDetail Hardware="hardware"></HardwareDetail>
+    }
+</div>
+
+@code {
+    public List<Hardware> Hardwares { get; set; } = new()
+    {
+        new()
+        {
+            Name = "Mainboard",
+            ProduceDate = new DateTime(2021, 4, 20)
+        },
+        new()
+        {
+            Name = "GPU",
+            ProduceDate = new DateTime(2022, 1, 1)
+        },
+        new()
+        {
+            Name = "CPU",
+            ProduceDate = new DateTime(2021, 6, 19)
+        }
+    };
+
+    private void ChangeHardwareDetail(Hardware hardware)
+    {
+        hardware.Name = "Changed in parent component";
+        hardware.ProduceDate = DateTime.UtcNow;
+    }
+}

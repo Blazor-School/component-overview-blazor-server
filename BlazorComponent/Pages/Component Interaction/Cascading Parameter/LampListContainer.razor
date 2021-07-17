@@ -3,24 +3,34 @@
 
 <div style="border: 5px solid red; width: max-content">
     <h3>LampListContainer</h3>
-    <div>Best lamp name: @Lamp.Name</div>
-    <div>Best lamp price: @Lamp.Price</div>
+    <div>Best lamp name: @MostSellLamp.Name</div>
+    <div>Best lamp price: @MostSellLamp.Price</div>
     <button @onclick="ChangeBestLamp">Change best lamp information</button>
-    <CascadingValue Value="Lamp">
-        <LampList></LampList>
+    <CascadingValue Value="MostSellLamp" Name="GoodLamp">
+        <CascadingValue Value="WorstSellLamp" Name="BadLamp">
+            <LampList></LampList>
+        </CascadingValue>
     </CascadingValue>
+    <div>Worst lamp name: @WorstSellLamp.Name</div>
+    <div>Worst lamp price: @WorstSellLamp.Price</div>
 </div>
 
 @code {
-    public Lamp Lamp { get; set; } = new()
+    public Lamp MostSellLamp { get; set; } = new()
     {
         Name = "Best lamp",
         Price = 9999
     };
 
+    public Lamp WorstSellLamp { get; set; } = new()
+    {
+        Name = "Worst lamp",
+        Price = 2021
+    };
+
     private void ChangeBestLamp()
     {
-        Lamp = new()
+        MostSellLamp = new()
         {
             Name = "Changed from container",
             Price = 99

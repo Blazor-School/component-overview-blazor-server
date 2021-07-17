@@ -1,0 +1,52 @@
+﻿@using Data.ComponentInteraction
+
+<h3>PhoneEdit</h3>
+<form>
+    <div>
+        <label>Phone Name:</label>
+        <input type="text" value="@Phone.Name" @oninput="OnNameChanged" />
+    </div>
+    <div>
+        <label>Battery:</label>
+        <input type="range" min="0" max="100" value="@Phone.BatteryPercentage" @oninput="OnBatteryChanged" />
+    </div>
+</form>
+<button @onclick="ResetValues">Reset values</button>
+
+@code {
+    [Parameter]
+    public Phone Phone { get; set; } = new()
+    {
+        Name = "Default name",
+        BatteryPercentage = 50
+    };
+    [Parameter]
+    public Action OnUpdatePhoneValue { get; set; }
+    [Parameter]
+    public Func<Task> OnUpdatePhoneValueAsync { get; set; }
+
+    private void OnBatteryChanged(ChangeEventArgs arg)
+    {
+        Phone.BatteryPercentage = Convert.ToDouble(arg.Value);
+        OnUpdatePhoneValue?.Invoke();
+    }
+
+    private void OnNameChanged(ChangeEventArgs arg)
+    {
+        Phone.Name = arg.Value as string;
+        OnUpdatePhoneValueAsync?.Invoke();
+    }
+
+    private void ResetValues()
+    {
+        // You must not change the reference of a parameter
+        //Phone = new()
+        //{
+        //    Name = "ROG Phone 2",
+        //    BatteryPercentage = 50
+        //};
+
+        Phone.Name = "ROG Phone 2";
+        Phone.BatteryPercentage = 50;
+    }
+}
