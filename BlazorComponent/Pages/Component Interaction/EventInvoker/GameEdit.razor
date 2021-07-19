@@ -1,0 +1,31 @@
+﻿@using Data.ComponentInteraction
+@using TransferServices
+@inject StoreIndexTransferService StoreIndexTransferService
+@implements IDisposable
+
+<div style="border: 5px solid blue; width: max-content;">
+    <h3>GameEdit</h3>
+    <div>
+        <input type="text" @bind-value="StoreIndexTransferService.SelectedGame.Name" @bind-value:event="oninput" />
+    </div>
+    <div>
+        <input type="number" @bind-value="StoreIndexTransferService.SelectedGame.Price" />
+    </div>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        StoreIndexTransferService.OnSelectedGameChanged += OnSelectedGameChangedHandler;
+    }
+
+    private void OnSelectedGameChangedHandler(object sender, Game games)
+    {
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        StoreIndexTransferService.OnSelectedGameChanged -= OnSelectedGameChangedHandler;
+    }
+}

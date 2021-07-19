@@ -1,0 +1,28 @@
+﻿@using Data.ComponentInteraction
+@using TransferServices
+@inject StoreIndexTransferService StoreIndexTransferService
+@implements IDisposable
+
+<div style="border: 5px solid green; width: max-content;">
+    <h3>GameDetail</h3>
+    <h1>Selected game</h1>
+    <div>Name: @StoreIndexTransferService.SelectedGame.Name</div>
+    <div>Price: @StoreIndexTransferService.SelectedGame.Price</div>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        StoreIndexTransferService.OnSelectedGameChanged += OnSelectedGameChangedHandler;
+    }
+
+    private void OnSelectedGameChangedHandler(object sender, Game games)
+    {
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        StoreIndexTransferService.OnSelectedGameChanged -= OnSelectedGameChangedHandler;
+    }
+}

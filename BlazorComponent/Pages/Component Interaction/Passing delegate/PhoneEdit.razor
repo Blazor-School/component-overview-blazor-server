@@ -1,17 +1,19 @@
 ﻿@using Data.ComponentInteraction
 
-<h3>PhoneEdit</h3>
-<form>
-    <div>
-        <label>Phone Name:</label>
-        <input type="text" value="@Phone.Name" @oninput="OnNameChanged" />
-    </div>
-    <div>
-        <label>Battery:</label>
-        <input type="range" min="0" max="100" value="@Phone.BatteryPercentage" @oninput="OnBatteryChanged" />
-    </div>
-</form>
-<button @onclick="ResetValues">Reset values</button>
+<div style="border: 5px solid blue">
+    <h3>PhoneEdit</h3>
+    <form>
+        <div>
+            <label>Phone Name:</label>
+            <input type="text" value="@Phone.Name" @oninput="OnNameChanged" />
+        </div>
+        <div>
+            <label>Battery:</label>
+            <input type="range" min="0" max="100" value="@Phone.BatteryPercentage" @oninput="OnBatteryChanged" />
+        </div>
+    </form>
+    <button @onclick="ResetValues">Reset values</button>
+</div>
 
 @code {
     [Parameter]
@@ -48,5 +50,7 @@
 
         Phone.Name = "ROG Phone 2";
         Phone.BatteryPercentage = 50;
+        OnUpdatePhoneValue?.Invoke();
+        OnUpdatePhoneValueAsync?.Invoke();
     }
 }

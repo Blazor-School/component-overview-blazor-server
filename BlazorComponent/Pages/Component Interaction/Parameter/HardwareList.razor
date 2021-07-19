@@ -1,7 +1,7 @@
 ﻿@using BlazorComponent.Data.ComponentInteraction
 @page "/parameter"
 
-<div style="border: 5px solid green">
+<div style="border: 5px solid green; width: max-content;">
     <h3>HardwareList</h3>
     <button @onclick="() => StateHasChanged()">Re-render parent component</button>
     @foreach (var hardware in Hardwares)

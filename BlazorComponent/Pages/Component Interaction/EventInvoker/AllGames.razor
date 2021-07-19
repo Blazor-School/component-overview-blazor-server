@@ -1,0 +1,54 @@
+﻿@using Data.ComponentInteraction
+@using TransferServices
+@inject StoreIndexTransferService StoreIndexTransferService
+@implements IDisposable
+
+<div style="border: 5px solid green; width: max-content;">
+    <h3>AllGames</h3>
+    @foreach (var game in StoreIndexTransferService.Games)
+    {
+        <div style="cursor: pointer;" @onclick="() => { StoreIndexTransferService.SelectedGame = game; }">
+            <div>Name: @game.Name</div>
+            <div>Price: @game.Price</div>
+        </div>
+    }
+    <GameEdit></GameEdit>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        StoreIndexTransferService.Games = new()
+        {
+            new()
+            {
+                Name = "The advanture of Sinbad",
+                Price = 22
+            },
+            new()
+            {
+                Name = "DotA 2",
+                Price = 0
+            }
+        };
+        StoreIndexTransferService.SelectedGame = new();
+        StoreIndexTransferService.OnGamesChanged += OnGameListChangedHandler;
+        StoreIndexTransferService.OnSelectedGameChanged += OnSelectedGameChangedHandler;
+    }
+
+    private void OnGameListChangedHandler(object sender, List<Game> games)
+    {
+        StateHasChanged();
+    }
+
+    private void OnSelectedGameChangedHandler(object sender, Game games)
+    {
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        StoreIndexTransferService.OnGamesChanged -= OnGameListChangedHandler;
+        StoreIndexTransferService.OnSelectedGameChanged -= OnSelectedGameChangedHandler;
+    }
+}
