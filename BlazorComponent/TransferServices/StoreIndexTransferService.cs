@@ -33,6 +33,10 @@ namespace BlazorComponent.TransferServices
         }
         public delegate void OnSelectedGameChangedEventHandler(object sender, Game game);
         public event OnSelectedGameChangedEventHandler OnSelectedGameChanged;
+        public StoreIndexTransferService()
+        {
+            SelectedGame = new();
+        }
 
         private void PropertySelectedGameChangedEventHandler(object sender, PropertyChangedEventArgs propertyName)
         {
