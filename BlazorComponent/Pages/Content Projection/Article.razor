@@ -1,0 +1,22 @@
+﻿<h3>Article</h3>
+<h1>Introduction</h1>
+<div>
+    @Introduction
+</div>
+<h1>Middle</h1>
+<div>
+    @Middle
+</div>
+<h1>End</h1>
+<div>
+    @End
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment Introduction { get; set; }
+    [Parameter]
+    public RenderFragment Middle { get; set; }
+    [Parameter]
+    public RenderFragment End { get; set; }
+}

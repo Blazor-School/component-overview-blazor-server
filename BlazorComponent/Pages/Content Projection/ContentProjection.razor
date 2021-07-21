@@ -1,0 +1,31 @@
+﻿@page "/content-projection"
+
+<h3>ContentProjection</h3>
+<div>
+    <h3>Single-slot container</h3>
+</div>
+<div>
+    <Highlight>
+        <span>This text comes from parent.</span>
+        <span>Another text comes from parent.</span>
+    </Highlight>
+</div>
+<div>
+    <h3>Multi-slot container</h3>
+</div>
+<div style="border: 5px solid blue;">
+    <Article>
+        <Introduction>
+            Study Blazor at Blazor School
+        </Introduction>
+        <Middle>
+            Blazor tutorial for beginners, developers, students and for everyone interested. Step by step walk through with sample codes for each step and free downloadable example projects to demonstrate the whole walk through. All example codes are updated to .NET 5.
+        </Middle>
+        <End>
+            There is also an app on Google Play with no ads and free content. You can check it out at <a href="https://play.google.com/store/apps/details?id=com.blazorschool">https://play.google.com/store/apps/details?id=com.blazorschool</a>
+        </End>
+    </Article>
+</div>
+@code {
+
+}
